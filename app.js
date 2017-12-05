@@ -42,7 +42,9 @@ app.use(express.static(path.join(__dirname, '/assets')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-
+app.get('/', function(req, res){
+res.send('hello');
+});
 app.get('/', function(req, res){
   get_post().then(function(posts){
     ////some changes here!!!!
@@ -55,7 +57,7 @@ app.get('/', function(req, res){
   res.render('index',{
      posts: posts,
      title: 'Here are all the posts:'
-     
+
 
 
   });
