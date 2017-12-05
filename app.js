@@ -13,6 +13,13 @@ const client = new Client({
 });
 client.connect();
 
+client.query('SELECT * FROM posts;', (err, res) => {
+  if (err) throw err;
+  for (let row of res.rows) {
+    console.log(row);
+  }
+  client.end();
+});
 
 
 
