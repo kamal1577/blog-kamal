@@ -18,7 +18,7 @@ var port = process.env.PORT || 8080
 // );
 // make one test entry
 // insert into posts (title, excerpt,body) values ('This is my test post 1', 'This is my test content of my test post 1.','bodybody  body bhhhhhh');
-//insert into posts (title, excerpt,body) values ('This is my project','This what's new .','I am stll learning');
+// insert into posts (title, excerpt,body) values ('This is my project','This what's new .','I am stll learning');
 function get_post (id){
               return new Promise(function(resolve, reject){
                   query('SELECT * FROM posts', [], function(err, results){
@@ -42,10 +42,11 @@ app.use(express.static(path.join(__dirname, '/assets')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+
 app.get('/', function(req, res){
-res.send('hello');
-});
-app.get('/', function(req, res){
+// query('SELECT * FROM posts', [], function(err, results){
+//   console.log(results);
+// })
   get_post().then(function(posts){
     ////some changes here!!!!
     var all_posts = [];
