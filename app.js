@@ -53,19 +53,23 @@ app.use(express.static(path.join(__dirname, '/assets')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-client.query('SELECT * FROM posts;', (err, res) => {
-  if (err) throw err;
-  let arr = [];
-  for (let row of res.rows) {
-    arr.push(row);
-  }
-  console.log(arr);
-  client.end();
-});
 
-app.get('/', function(req, res){
+app.get('/', function(request, response){
 
-  res.send('hi');
+    client.query('SELECT * FROM posts;', (err, res) => {
+      if (err) throw err;
+      let arr = [];
+      for (let row of res.rows) {
+        arr.push(row);
+      }
+      console.log(arr);
+      client.end();
+    });
+    
+  response.render('index',{
+       posts: arr,
+       title: 'Here are all the posts:'
+     });
   // client.query('SELECT * FROM posts;', (err, res) => {
   //   if (err) throw err;
   //   let arr = [];
