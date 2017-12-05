@@ -1,11 +1,28 @@
 var express = require('express');
 var app = express();
-var query = require('./query');
+// var query = require('./query');
 const path = require('path');
 var pug = require('pug');
 var bodyParser = require('body-parser');
 //set port
 var port = process.env.PORT || 8080
+const { Client } = require('pg');
+const client = new Client({
+  connectionString: process.env.DATABASE_URL,
+  ssl: true,
+});
+client.connect();
+client.query('SELECT * FROM posts;', (err, res) => {
+  if (err) throw err;
+  for (let row of res.rows) {
+    console.log(row);
+  }
+  client.end();
+});
+
+
+
+
 //CREATE DATABASE blog;
 // \c blog;
 
@@ -19,22 +36,22 @@ var port = process.env.PORT || 8080
 // make one test entry
 // insert into posts (title, excerpt,body) values ('This is my test post 1', 'This is my test content of my test post 1.','bodybody  body bhhhhhh');
 // insert into posts (title, excerpt,body) values ('This is my project','This what's new .','I am stll learning');
-function get_post (id){
-              return new Promise(function(resolve, reject){
-                  query('SELECT * FROM posts', [], function(err, results){
-                    //post.push(rows[i].dataValues);
-
-                   //handle the error and results as appropriate.
-                   if(err){
-                    reject(err);
-          //return done(client);
-           }
-         resolve(results.rows);
-// all_messages = results.rows;
-});
-
-});
-}
+// function get_post (id){
+//               return new Promise(function(resolve, reject){
+//                   query('SELECT * FROM posts', [], function(err, results){
+//                     //post.push(rows[i].dataValues);
+//
+//                    //handle the error and results as appropriate.
+//                    if(err){
+//                     reject(err);
+//           //return done(client);
+//            }
+//          resolve(results.rows);
+// // all_messages = results.rows;
+// });
+//
+// });
+// }
 app.set('views', path.join(__dirname,'/views'));
 app.set('view engine', 'pug');
 app.use(express.static('assets'));
@@ -47,23 +64,23 @@ app.get('/', function(req, res){
 // query('SELECT * FROM posts', [], function(err, results){
 //   console.log(results);
 // })
-  get_post().then(function(posts){
-    ////some changes here!!!!
-    var all_posts = [];
-    for(var i = 0; i < posts.length; i++) {
-      all_posts.push(posts[i].dataValues);
-
-    }
-    console.log(posts);
-  res.render('index',{
-     posts: posts,
-     title: 'Here are all the posts:'
-
-
-
-  });
-   console.log('Here are all the posts');
-});
+//   get_post().then(function(posts){
+//     ////some changes here!!!!
+//     var all_posts = [];
+//     for(var i = 0; i < posts.length; i++) {
+//       all_posts.push(posts[i].dataValues);
+//
+//     }
+//     console.log(posts);
+//   res.render('index',{
+//      posts: posts,
+//      title: 'Here are all the posts:'
+//
+//
+//
+//   });
+//    console.log('Here are all the posts');
+// });
 });
 
 // app.get('/', function(req, res){
