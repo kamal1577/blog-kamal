@@ -57,14 +57,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.get('/', function(req, res){
   client.query('SELECT * FROM posts;', (err, res) => {
     if (err) throw err;
+    let arr = [];
     for (let row of res.rows) {
-      let arr = [];
       arr.push(row);
-        res.render('index',{
-           posts: arr,
-           title: 'Here are all the posts:'
-         });
     }
+    res.render('index',{
+       posts: arr,
+       title: 'Here are all the posts:'
+     });
     client.end();
   });
 // query('SELECT * FROM posts', [], function(err, results){
