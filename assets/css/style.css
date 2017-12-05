@@ -1,0 +1,24 @@
+h1{
+  color : black;
+}
+h2{
+  color: red;
+}
+
+h3{
+  color : blue;
+}
+
+body{
+  background-color : 	#00FFFF;
+  padding-left: 25px;
+}
+
+button{
+  color: green;
+}
+.navbar-nav{
+   font-family : lobster;
+     font-size:1.7em;
+     background-color :orange;
+}

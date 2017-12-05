@@ -1,0 +1,31 @@
+include includes/header.pug
+div(class="container-fluid")
+   div
+       h1= title
+       
+       form(action="/add-post" method="post")
+           div
+               label= 'Title:'
+               br   
+               input(type='text' name='title')
+             
+           div
+               br
+               label= 'Excerpt:'
+               br
+               textarea(name='username')
+               
+           div
+               br
+               label= 'Post Comment:'
+               br
+               textarea(name='message')
+           
+           div 
+               br
+               button(type='submit') Submit
+               
+  
+include includes/footer.pug
+   
+     
