@@ -53,20 +53,32 @@ app.use(express.static(path.join(__dirname, '/assets')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-
+client.query('SELECT * FROM posts;', (err, res) => {
+  if (err) throw err;
+  let arr = [];
+  for (let row of res.rows) {
+    arr.push(row);
+  }
+  console.log(arr);
+  res.render('index',{
+     posts: arr,
+     title: 'Here are all the posts:'
+   });
+  client.end();
+});
 app.get('/', function(req, res){
-  client.query('SELECT * FROM posts;', (err, res) => {
-    if (err) throw err;
-    let arr = [];
-    for (let row of res.rows) {
-      arr.push(row);
-    }
-    res.render('index',{
-       posts: arr,
-       title: 'Here are all the posts:'
-     });
-    client.end();
-  });
+  // client.query('SELECT * FROM posts;', (err, res) => {
+  //   if (err) throw err;
+  //   let arr = [];
+  //   for (let row of res.rows) {
+  //     arr.push(row);
+  //   }
+  //   res.render('index',{
+  //      posts: arr,
+  //      title: 'Here are all the posts:'
+  //    });
+  //   client.end();
+  // });
 // query('SELECT * FROM posts', [], function(err, results){
 //   console.log(results);
 // })
