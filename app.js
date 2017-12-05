@@ -1,6 +1,6 @@
 var express = require('express');
 var app = express();
-// var query = require('./query');
+var query = require('./query');
 const path = require('path');
 var pug = require('pug');
 var bodyParser = require('body-parser');
@@ -30,22 +30,22 @@ client.connect();
 // make one test entry
 // insert into posts (title, excerpt,body) values ('This is my test post 1', 'This is my test content of my test post 1.','bodybody  body bhhhhhh');
 // insert into posts (title, excerpt,body) values ('This is my project','This what's new .','I am stll learning');
-// function get_post (id){
-//               return new Promise(function(resolve, reject){
-//                   query('SELECT * FROM posts', [], function(err, results){
-//                     //post.push(rows[i].dataValues);
-//
-//                    //handle the error and results as appropriate.
-//                    if(err){
-//                     reject(err);
-//           //return done(client);
-//            }
-//          resolve(results.rows);
-// // all_messages = results.rows;
-// });
-//
-// });
-// }
+function get_post (id){
+              return new Promise(function(resolve, reject){
+                  query('SELECT * FROM posts', [], function(err, results){
+                    //post.push(rows[i].dataValues);
+
+                   //handle the error and results as appropriate.
+                   if(err){
+                    reject(err);
+          //return done(client);
+           }
+         resolve(results.rows);
+// all_messages = results.rows;
+});
+
+});
+}
 app.set('views', path.join(__dirname,'/views'));
 app.set('view engine', 'pug');
 app.use(express.static('assets'));
@@ -103,15 +103,15 @@ app.get('/', function(request, response){
 // });
 });
 
-// app.get('/', function(req, res){
-//   get_post().then(function(messages){
-//     console.log(messages);
-//   res.render('index',{
-//      m: messages,
-//      title: 'Here are New Posts:'
-//   });
-// });
-// });
+app.get('/', function(req, res){
+  get_post().then(function(messages){
+    console.log(messages);
+  res.render('index',{
+     m: messages,
+     title: 'Here are New Posts:'
+  });
+});
+});
 //
 app.get('/portfolio', function(req, res){
   res.render('portfolio',{
