@@ -14,7 +14,7 @@ module.exports = function(queryString, queryParameters, onComplete) {
  //everything else is almost the same as before, replacing hard-coded strings and arrays with parameters
  pool.connect(function(err, client, done) {
    if (err) {
-     console.log(`error: connection to database failed. connection string: "${connectionString}" ${err}`);
+     console.log(`error: connection to database failed. connection string:  ${err}`);
      if (client) {
        done(client);
      }
