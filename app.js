@@ -60,13 +60,12 @@ client.query('SELECT * FROM posts;', (err, res) => {
     arr.push(row);
   }
   console.log(arr);
-  res.render('index',{
-     posts: arr,
-     title: 'Here are all the posts:'
-   });
   client.end();
 });
+
 app.get('/', function(req, res){
+
+  res.send('hi');
   // client.query('SELECT * FROM posts;', (err, res) => {
   //   if (err) throw err;
   //   let arr = [];
