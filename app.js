@@ -64,12 +64,11 @@ app.get('/', function(request, response){
       }
       console.log(arr);
       client.end();
+      response.render('index',{
+        posts: arr,
+        title: 'Here are all the posts:'
+       });
     });
-    
-  response.render('index',{
-       posts: arr,
-       title: 'Here are all the posts:'
-     });
   // client.query('SELECT * FROM posts;', (err, res) => {
   //   if (err) throw err;
   //   let arr = [];
