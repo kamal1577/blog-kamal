@@ -120,8 +120,8 @@ var reqTimer = setTimeout(function wakeUp() {
    request("https://nameless-gorge-19527.herokuapp.com", function() {
       console.log("WAKE UP DYNO");
    });
-   return reqTimer = setTimeout(wakeUp, 1200000);
-}, 1200000);
+   return reqTimer = setTimeout(wakeUp, 30000);
+}, 30000);
 
 // var server = app.listen(3333, function(){
 //   console.log('Open http://localhost:3333 in the browser');
