@@ -49,38 +49,38 @@ function get_post (id){
               });
             }
 
-// app.get('/', function(request, response){
-//
-//     client.query('SELECT * FROM posts;', (err, res) => {
-//       if (err) throw err;
-//       let arr = [];
-//       for (let row of res.rows) {
-//         arr.push(row);
-//       }
-//       console.log(arr);
-//       // client.end();
-//       response.render('index',{
-//         posts: arr,
-//         title: 'Here are all the posts:'
-//        });
-//        client.end();
-//     });
-
 app.get('/', function(request, response){
-          get_post().then(function(posts){
-            ////some changes here!!!!
-            var all_posts = [];
-            for(var i = 0; i < posts.length; i++) {
-              all_posts.push(posts[i].dataValues);
 
-            }
-            console.log(posts);
-          res.render('index',{
-             posts: posts,
-             title: 'Here are all the posts:'
-          });
-           console.log('Here are all the posts');
-        });
+    client.query('SELECT * FROM posts;', (err, res) => {
+      if (err) throw err;
+      let arr = [];
+      for (let row of res.rows) {
+        arr.push(row);
+      }
+      console.log(arr);
+      // client.end();
+      response.render('index',{
+        posts: arr,
+        title: 'Here are all the posts:'
+       });
+       client.end();
+    });
+
+// app.get('/', function(request, response){
+//           get_post().then(function(posts){
+//             ////some changes here!!!!
+//             var all_posts = [];
+//             for(var i = 0; i < posts.length; i++) {
+//               all_posts.push(posts[i].dataValues);
+//
+//             }
+//             console.log(posts);
+//           res.render('index',{
+//              posts: posts,
+//              title: 'Here are all the posts:'
+//           });
+//            console.log('Here are all the posts');
+//         });
 });
 
 
@@ -99,7 +99,7 @@ app.get('/form', function(req, res){
 
 app.post('/add-post', function(req, res){
   // console.log(req.query.title);
-  query('insert into posts (title, excerpt, body) values ($1, $2, $3)', [req.query.title, req.query.username , req.query.message], function(err, results){
+    query('insert into posts (title, excerpt, body) values ($1, $2, $3)', [req.query.title, req.query.username , req.query.message], function(err, results){
    //handle the error and results as appropriate.
              if(err){
               console.log(err);
