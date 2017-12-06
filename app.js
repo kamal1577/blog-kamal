@@ -114,14 +114,8 @@ app.post('/add-post', function(req, res){
 
 app.get('*', function(req, res) {
   res.status(404).send('<h1>uh oh! page not found!</h1>');
-
 });
-var reqTimer = setTimeout(function wakeUp() {
-   request("https://nameless-gorge-19527.herokuapp.com", function() {
-      console.log("WAKE UP DYNO");
-   });
-   return reqTimer = setTimeout(wakeUp, 30000);
-}, 30000);
+
 
 // var server = app.listen(3333, function(){
 //   console.log('Open http://localhost:3333 in the browser');
