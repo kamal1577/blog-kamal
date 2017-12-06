@@ -128,17 +128,18 @@ app.get('/form', function(req, res){
 });
 
 app.post('/add-post', function(req, res){
-  console.log(req.body.title);
-  query('insert into posts (title, excerpt, body) values ($1, $2, $3)', [req.body.title, req.body.username , req.body.message], function(err, results){
+  console.log(req.query.title);
+  query('insert into posts (title, excerpt, body) values ($1, $2, $3)', [req.query.title, req.query.username , req.query.message], function(err, results){
    //handle the error and results as appropriate.
    if(err){
     console.log(err);
     return done(client);
 
    }
-   console.log('New message accepted.');
+   console.log('New Post accepted.');
+    });
    return res.redirect('/');
- });
+
 });
 
 
