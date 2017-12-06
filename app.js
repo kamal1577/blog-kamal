@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 var query = require('./query');
-const path = require('path');
+var path = require('path');
 var pug = require('pug');
 var bodyParser = require('body-parser');
 //set port
@@ -15,8 +15,8 @@ client.connect();
 
 app.set('views', path.join(__dirname,'/views'));
 app.set('view engine', 'pug');
-app.use(express.static('assets'));
-app.use(express.static(path.join(__dirname, 'assets')));
+app.use(express.static('/assets'));
+app.use(express.static(path.join(__dirname, '/assets')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
