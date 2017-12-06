@@ -13,10 +13,10 @@ const client = new Client({
 });
 client.connect();
 
-app.set('views', path.join(__dirname,'/views'));
+// app.set('views', path.join(__dirname,'/views'));
 app.set('view engine', 'pug');
-app.use(express.static('/assets'));
-app.use(express.static(path.join(__dirname, '/assets')));
+// app.use(express.static('assets'));
+app.use(express.static(path.join(__dirname, 'assets')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -99,15 +99,15 @@ app.get('/', function(request, response){
 // });
 });
 
-app.get('/', function(req, res){
-  get_post().then(function(messages){
-    console.log(messages);
-  res.render('index',{
-     m: messages,
-     title: 'Here are New Posts:'
-  });
-});
-});
+// app.get('/', function(req, res){
+//   get_post().then(function(messages){
+//     console.log(messages);
+//   res.render('index',{
+//      m: messages,
+//      title: 'Here are New Posts:'
+//   });
+// });
+// });
 //
 app.get('/portfolio', function(req, res){
   res.render('portfolio',{
