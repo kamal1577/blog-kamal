@@ -3,7 +3,7 @@ var parseConnectionString = require('pg-connection-string');
 // const connectionString = 'postgres://postgres:jannat15@localhost/blog';
  const connectionString ='postgres://odqemyoqwjqcue:c032b5679b0254446c6c6c5fc861f25b71ba1a1b8a773d7094198a9b70903476@ec2-54-235-219-113.compute-1.amazonaws.com:5432/deg4vhpg8v6hac'
 // const connectionString = 'postgres://' + process.env.postgres + ':' + process.env.jannat15+ '@localhost/blog';
-const pool = new pg.Pool(typeof connectionString === 'string' ? parseConnectionString.parse(connectionString) : connectionString);
+// const pool = new pg.Pool(typeof connectionString === 'string' ? parseConnectionString.parse(connectionString) : connectionString);
 const pool = new pg.Pool(process.env.DATABASE_URL);
 // const { Client } = require('pg');
 //  const client = new Client({
