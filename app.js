@@ -126,11 +126,7 @@ app.get('/form', function(req, res){
      title: 'Add New Post:'
   });
 });
-/////////////////???????!!!!!
- // app.post('/form', function(req, res){
- //      var newPost = req.body.newPost;
- //  });
-///////////////
+
 app.post('/add-post', function(req, res){
   console.log(req.body.title);
   query('insert into posts (title, excerpt, body) values ($1, $2, $3)', [req.body.title, req.body.username , req.body.message], function(err, results){
@@ -144,15 +140,7 @@ app.post('/add-post', function(req, res){
  });
 });
 
-///////////////////////
-// app.use(function(err, req, res, next) {
-//     res.status(err.status || 500);
-//     res.render('error', {
-//         message: err.message,
-//         error: {}
-//     });
-// });
-//////////////////////////
+
 app.get('*', function(req, res) {
   res.status(404).send('<h1>uh oh! page not found!</h1>');
 });
