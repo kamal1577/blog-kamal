@@ -13,10 +13,12 @@ const client = new Client({
 });
 client.connect();
 
-
-
-
-
+app.set('views', path.join(__dirname,'/views'));
+app.set('view engine', 'pug');
+app.use(express.static('assets'));
+app.use(express.static(path.join(__dirname, 'assets')));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 //CREATE DATABASE blog;
 // \c blog;
@@ -33,27 +35,19 @@ client.connect();
 // insert into posts (title, excerpt,body) values ('This is my project','This what's new .','I am stll learning');
 function get_post (id){
               return new Promise(function(resolve, reject){
-                  query('SELECT * FROM posts', [], function(err, results){
+                  query('SELECT * FROM posts where id=$1',[id], function(err, results){
                     //post.push(rows[i].dataValues);
 
                    //handle the error and results as appropriate.
                    if(err){
                     reject(err);
           //return done(client);
-           }
-         resolve(results.rows);
+                    }
+                 resolve(results.rows);
 // all_messages = results.rows;
-});
-
-});
-}
-app.set('views', path.join(__dirname,'/views'));
-app.set('view engine', 'pug');
-app.use(express.static('assets'));
-app.use(express.static(path.join(__dirname, '/assets')));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-
+                 });
+              });
+            }
 
 app.get('/', function(request, response){
 
@@ -64,11 +58,12 @@ app.get('/', function(request, response){
         arr.push(row);
       }
       console.log(arr);
-      client.end();
+      // client.end();
       response.render('index',{
         posts: arr,
         title: 'Here are all the posts:'
        });
+       client.end();
     });
   // client.query('SELECT * FROM posts;', (err, res) => {
   //   if (err) throw err;
