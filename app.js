@@ -59,7 +59,7 @@ app.get('/', function(request, response){
       }
       console.log(arr);
       // client.end();
-      response.render('index',{
+      response.render('blog',{
         posts: arr,
         title: 'Here are all the posts:'
        });
