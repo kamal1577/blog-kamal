@@ -22,7 +22,7 @@ module.exports = function(queryString, queryParameters, onComplete) {
            connectionString: process.env.DATABASE_URL,
             ssl: true,
         });
-        client.connect();
+      
  //everything else is almost the same as before, replacing hard-coded strings and arrays with parameters
  // pool.connect(function(err, client, done) {
  pg.connect(connectionString, function(err, client, done) {
