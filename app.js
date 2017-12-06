@@ -5,7 +5,7 @@ var path = require('path');
 var pug = require('pug');
 var bodyParser = require('body-parser');
 //set port
-var port = process.env.PORT || 8080
+var port = process.env.PORT || 5000
 const { Client } = require('pg');
 const client = new Client({
   connectionString: process.env.DATABASE_URL,
@@ -120,6 +120,9 @@ app.get('*', function(req, res) {
 // var server = app.listen(3333, function(){
 //   console.log('Open http://localhost:3333 in the browser');
 // });
-  app.listen(port, function() {
-            console.log('app running');
-    });
+  // app.listen(port, function() {
+  //           console.log('app running');
+  //   });
+  app.listen(process.env.PORT || 3000, function(){
+  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+});
