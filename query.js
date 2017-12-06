@@ -3,13 +3,13 @@ var parseConnectionString = require('pg-connection-string');
 const connectionString = 'postgres://postgres:jannat15@localhost/blog';
 // const connectionString = 'postgres://' + process.env.postgres + ':' + process.env.jannat15+ '@localhost/blog';
 // const pool = new pg.Pool(typeof connectionString === 'string' ? parseConnectionString.parse(connectionString) : connectionString);
-const pool = new pg.Pool(process.env.DATABASE_URL);
-// const { Client } = require('pg');
-//  const client = new Client({
-//    connectionString: process.env.DATABASE_URL,
-//   ssl: true,
-// });
-// client.connect();
+// const pool = new pg.Pool(process.env.DATABASE_URL);
+const { Client } = require('pg');
+ const client = new Client({
+   connectionString: process.env.DATABASE_URL,
+  ssl: true,
+});
+ client.connect();
 //export the adapter function
 module.exports = function(queryString, queryParameters, onComplete) {
  //normalize parameters, allowing only passing a query string and an optional `onComplete` handler
@@ -18,7 +18,8 @@ module.exports = function(queryString, queryParameters, onComplete) {
    queryParameters = [];
  }
  //everything else is almost the same as before, replacing hard-coded strings and arrays with parameters
- pool.connect(function(err, client, done) {
+ // pool.connect(function(err, client, done) {
+ pg.connect(connectionString, function(err, client, done) {
    if (err) {
      console.log(`error: connection to database failed. connection string:  ${err}`);
      if (client) {
@@ -30,7 +31,7 @@ module.exports = function(queryString, queryParameters, onComplete) {
      }
      return;
    }
-   client.query(queryString, queryParameters, function(err, result, pool) {
+   client.query(queryString, queryParameters, function(err, result) {
      if (err) {
        done(client);
        console.log(`error: query failed: "${queryString}", "${queryParameters}", ${err}`);
