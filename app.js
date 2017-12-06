@@ -133,9 +133,12 @@ app.post('/add-post', function(req, res){
    //handle the error and results as appropriate.
    if(err){
     console.log(err);
-    return done(client);
+    // return done(client);
+
    }
    console.log('New message accepted.');
+   // console.log(arr);
+   client.end();
    return res.redirect('/');
  });
 });
