@@ -1,7 +1,7 @@
 var pg = require('pg');
 var parseConnectionString = require('pg-connection-string');
 // const connectionString = 'postgres://postgres:jannat15@localhost/blog';
-const connectionString = 'postgres://' + process.env.postgres + ':' + process.env.jannat15+ '@localhost/blog';
+let connectionString = process.env.DATABASE_URL ? process.env.DATABASE_URL :  'postgres://' + process.env.postgres + ':' + process.env.jannat15+ '@localhost/blog';
 const pool = new pg.Pool(typeof connectionString === 'string' ? parseConnectionString.parse(connectionString) : connectionString);
 // const pool = new pg.Pool(process.env.DATABASE_URL);
 // const { Client } = require('pg');

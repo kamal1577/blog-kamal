@@ -98,20 +98,25 @@ app.get('/form', function(req, res){
   });
 });
 
+//submiting the button
 app.post('/add-post', function(req, res){
-  // console.log(req.query.title);
-    query('insert into posts (title, excerpt, body) values ($1, $2, $3)', [req.query.title, req.query.username , req.query.message], function(err, results){
-   //handle the error and results as appropriate.
-             if(err){
-              console.log(err);
-              // return done(client);
-              }
-              return done(client);
-             console.log('New Post accepted.');
-              });
-             return res.redirect('/');
-    });
 
+  pool.connect(function(err, client, done){
+     client.query('insert into posts (title, excerpt, body) values ($1, $2, $3)', [req.query.title, req.query.username , req.query.message]);
+     //, function(err, results){
+   //handle the error and results as appropriate.
+             // if(err){
+              // console.log(err);
+              // return done(client);
+              // }
+              // return done(client);
+              done();
+             //console.log('New Post accepted.');
+            //  });
+            // return res.redirect('/');
+            res.redirect('/');
+        });
+   });
 
 app.get('*', function(req, res) {
   res.status(404).send('<h1>uh oh! page not found!</h1>');
