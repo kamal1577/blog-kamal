@@ -101,13 +101,13 @@ app.post('/add-post', function(req, res){
   // console.log(req.query.title);
     query('insert into posts (title, excerpt, body) values ($1, $2, $3)', [req.query.title, req.query.username , req.query.message], function(err, results){
    //handle the error and results as appropriate.
-             if(err){
-              console.log(err);
-              // return done(client);
-              }
-              return done(client);
-             console.log('New Post accepted.');
-              });
+             // if(err){
+             //  console.log(err);
+             //  // return done(client);
+             //  }
+             //  return done(client);
+             // console.log('New Post accepted.');
+             //  });
              return res.redirect('/');
     });
 
