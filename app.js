@@ -4,11 +4,11 @@ var app = express();
 //var query = require('./query');
 var path = require('path');
 var pug = require('pug');
-//var pg= require('pg');
+// var pg= require('pg');
 var bodyParser = require('body-parser');
 //set port
-var PORT = process.env.PORT || 5000
-const { Client } = require('pg');
+var port = process.env.PORT || 5000
+let { Client } = require('pg');
 let connString;
 if (process.env.DATABASE_URL){
   connString = process.env.DATABASE_URL
@@ -23,7 +23,7 @@ if (process.env.DATABASE_URL){
  }
 }
 
-const client = new Client(connString);
+var client = new Client(connString);
 client.connect();
 
 // app.set('views', path.join(__dirname,'/views'));
@@ -70,13 +70,13 @@ app.get('/', function(request, response){
       for (let row of res.rows) {
         arr.push(row);
       }
-      console.log(arr);
+      //console.log(arr);
       // client.end();
       response.render('index',{
         posts: arr,
         title: 'Here are all the posts:'
        });
-       client.end();
+       //client.end();
     });
     });
 
@@ -112,6 +112,7 @@ app.get('/form', function(req, res){
 //submiting the button
 app.post('/add-post', function(req, res){
   //pool.connect(function(err, client, done){
+    console.log(req.body)
      client.query('insert into posts (title, excerpt, body) values ($1, $2, $3)', [req.body.title, req.body.username , req.body.message], function(err, results){
    //handle the error and results as appropriate.
              if(err){
@@ -140,6 +141,6 @@ app.get('*', function(req, res) {
   // app.listen(port, function() {
   //           console.log('app running');
   //   });
-  app.listen(PORT, function(){
+  app.listen(port, function(){
   console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
 });
