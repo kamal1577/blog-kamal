@@ -56,19 +56,19 @@ function get_post (id){
 app.get('/', function(request, response){
 
     client.query('SELECT * FROM posts', (err, res) => {
-      if (err) throw err;
-      let arr = [];
-      for (let row of res.rows) {
-        arr.push(row);
-      }
-      console.log(arr);
-      // client.end();
-      response.render('index',{
-        posts: arr,
-        title: 'Here are all the posts:'
-       });
-       client.end();
-    });
+                if (err) throw err;
+                let arr = [];
+                for (let row of res.rows) {
+                  arr.push(row);
+                }
+       console.log(arr);
+                // client.end();
+                response.render('index',{
+                      posts: arr,
+                      title: 'Here are all the posts:'
+                 });
+                 client.end();
+              });
 
 // app.get('/', function(request, response){
 //           get_post().then(function(posts){
@@ -129,4 +129,4 @@ app.get('*', function(req, res) {
   //   });
   app.listen(process.env.PORT || 3000, function(){
   console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
-});
+             });
