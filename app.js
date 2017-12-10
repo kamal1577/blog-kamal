@@ -9,10 +9,21 @@ var bodyParser = require('body-parser');
 //set port
 var port = process.env.PORT || 5000
 const { Client } = require('pg');
-const client = new Client({
-  connectionString: process.env.DATABASE_URL,
-  ssl: true,
-});
+let connString;
+if (process.env.DATABASE_URL){
+  connString = process.env.DATABASE_URL
+} else {
+ // connString =  'postgres://' + process.env.POSTGRES_USER + ':' + process.env.POSTGRES_PASSWORD;
+ connString = {
+   user: 'postgres',
+   password: 'jannat15',
+   database: 'blog',
+   host: 'localhost',
+   port: 5432
+ }
+}
+
+const client = new Client(connString);
 client.connect();
 
 // app.set('views', path.join(__dirname,'/views'));
@@ -100,9 +111,9 @@ app.get('/form', function(req, res){
 
 //submiting the button
 app.post('/add-post', function(req, res){
-
+  console.log(req.body);
   //pool.connect(function(err, client, done){
-     client.query('insert into posts (title, excerpt, body) values ($1, $2, $3)', [req.query.title, req.query.username , req.query.message], function(err, results){
+     client.query('insert into posts (title, excerpt, body) values ($1, $2, $3)', [req.body.title, req.body.username , req.body.message], function(err, results){
    //handle the error and results as appropriate.
              if(err){
                throw err;
