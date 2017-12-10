@@ -1,13 +1,13 @@
 var fs = require('fs');
 var express = require('express');
 var app = express();
-var query = require('./query');
+//var query = require('./query');
 var path = require('path');
 var pug = require('pug');
-var pg= require('pg');
+//var pg= require('pg');
 var bodyParser = require('body-parser');
 //set port
-var port = process.env.PORT || 5000
+var PORT = process.env.PORT || 5000
 const { Client } = require('pg');
 let connString;
 if (process.env.DATABASE_URL){
@@ -46,21 +46,21 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // make one test entry
 // insert into posts (title, excerpt,body) values ('This is my test post 1', 'This is my test content of my test post 1.','bodybody  body bhhhhhh');
 // insert into posts (title, excerpt,body) values ('This is my project','This what's new .','I am stll learning');
-function get_post (id){
-              return new Promise(function(resolve, reject){
-                  query('SELECT * FROM posts where id=$1',[id], function(err, results){
-                    //post.push(rows[i].dataValues);
-
-                   //handle the error and results as appropriate.
-                   if(err){
-                    reject(err);
-          //return done(client);
-                    }
-                 resolve(results.rows);
-// all_messages = results.rows;
-                 });
-              });
-            }
+// function get_post (id){
+//               return new Promise(function(resolve, reject){
+//                   query('SELECT * FROM posts where id=$1',[id], function(err, results){
+//                     //post.push(rows[i].dataValues);
+//
+//                    //handle the error and results as appropriate.
+//                    if(err){
+//                     reject(err);
+//           //return done(client);
+//                     }
+//                  resolve(results.rows);
+// // all_messages = results.rows;
+//                  });
+//               });
+//             }
 
 app.get('/', function(request, response){
 
@@ -111,14 +111,15 @@ app.get('/form', function(req, res){
 
 //submiting the button
 app.post('/add-post', function(req, res){
-  console.log(req.body);
   //pool.connect(function(err, client, done){
      client.query('insert into posts (title, excerpt, body) values ($1, $2, $3)', [req.body.title, req.body.username , req.body.message], function(err, results){
    //handle the error and results as appropriate.
              if(err){
                throw err;
+               console.log(err)
               // return done(client);
               }
+              console.log(results)
               // return done(client);
               //done();
              //console.log('New Post accepted.');
@@ -139,6 +140,6 @@ app.get('*', function(req, res) {
   // app.listen(port, function() {
   //           console.log('app running');
   //   });
-  app.listen(process.env.PORT || 5000, function(){
+  app.listen(PORT, function(){
   console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
 });
