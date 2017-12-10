@@ -51,7 +51,7 @@ function get_post (id){
 
 app.get('/', function(request, response){
 
-    client.query('SELECT * FROM posts;', (err, res) => {
+    client.query('SELECT * FROM posts', (err, res) => {
       if (err) throw err;
       let arr = [];
       for (let row of res.rows) {
