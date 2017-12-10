@@ -85,8 +85,6 @@ app.get('/', function(request, response){
 //            console.log('Here are all the posts');
 //         });
 
-
-
 app.get('/portfolio', function(req, res){
   res.render('portfolio',{
      title: 'My projects:'
