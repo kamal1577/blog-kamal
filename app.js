@@ -101,16 +101,16 @@ app.get('/form', function(req, res){
 //submiting the button
 app.post('/add-post', function(req, res){
 
-  pool.connect(function(err, client, done){
-     client.query('insert into posts (title, excerpt, body) values ($1, $2, $3)', [req.query.title, req.query.username , req.query.message]);
-     //, function(err, results){
+  //pool.connect(function(err, client, done){
+     client.query('insert into posts (title, excerpt, body) values ($1, $2, $3)', [req.query.title, req.query.username , req.query.message],
+     , function(err, results){
    //handle the error and results as appropriate.
-             // if(err){
-              // console.log(err);
+             if(err){
+               throw err;
               // return done(client);
-              // }
+              }
               // return done(client);
-              done();
+              //done();
              //console.log('New Post accepted.');
             //  });
             // return res.redirect('/');
