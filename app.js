@@ -4,8 +4,10 @@ var query = require('./query');
 var path = require('path');
 var pug = require('pug');
 var bodyParser = require('body-parser');
+// load environment variables
+require('.env').config();
 //set port
-// var port = process.env.PORT || 5000
+var port = process.env.PORT || 5000
 const { Client } = require('pg');
 const client = new Client({
   connectionString: process.env.DATABASE_URL,
@@ -18,7 +20,9 @@ app.set('view engine', 'pug');
 // app.use(express.static('assets'));
 app.use(express.static(path.join(__dirname, 'assets')));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use(bodyParser.urlencoded({ extended: true}));
+app.use(expressValidator());
 
 //CREATE DATABASE blog;
 // \c blog;
@@ -123,9 +127,9 @@ app.get('*', function(req, res) {
   // app.listen(port, function() {
   //           console.log('app running');
   //   });
-//   app.listen(process.env.PORT || 3000, function(){
-//   console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
-// });
-app.listen(process.env.PORT || 3000, function(){
-  console.log('Server running on default  3000');
+  app.listen(process.env.PORT || 3000, function(){
+  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
 });
+// app.listen(process.env.PORT || 3000, function(){
+//   console.log('Server running on default  3000');
+// });
