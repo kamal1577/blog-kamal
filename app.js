@@ -1,8 +1,10 @@
+var fs = require('fs');
 var express = require('express');
 var app = express();
 var query = require('./query');
 var path = require('path');
 var pug = require('pug');
+var pg= require('pg');
 var bodyParser = require('body-parser');
 //set port
 var port = process.env.PORT || 5000
@@ -65,6 +67,7 @@ app.get('/', function(request, response){
        });
        client.end();
     });
+    });
 
 // app.get('/', function(request, response){
 //           get_post().then(function(posts){
@@ -81,7 +84,7 @@ app.get('/', function(request, response){
 //           });
 //            console.log('Here are all the posts');
 //         });
-});
+
 
 
 app.get('/portfolio', function(req, res){
@@ -103,9 +106,9 @@ app.post('/add-post', function(req, res){
    //handle the error and results as appropriate.
              if(err){
               console.log(err);
-               return done(client);
+              // return done(client);
               }
-              //return done(client);
+              return done(client);
              console.log('New Post accepted.');
               });
              return res.redirect('/');
