@@ -5,7 +5,7 @@ var path = require('path');
 var pug = require('pug');
 var bodyParser = require('body-parser');
 // load environment variables
-require('dotenv').config();
+
 //set port
 var port = process.env.PORT || 5000
 const { Client } = require('pg');
@@ -22,6 +22,7 @@ app.use(express.static(path.join(__dirname, 'assets')));
 app.use(bodyParser.json());
 
 app.use(bodyParser.urlencoded({ extended: false}));
+require('dotenv').config();
 
 
 //CREATE DATABASE blog;
@@ -115,11 +116,9 @@ app.post('/add-post', function(req, res){
              return res.redirect('/');
     });
 
-
 app.get('*', function(req, res) {
   res.status(404).send('<h1>uh oh! page not found!</h1>');
 });
-
 
 // var server = app.listen(3333, function(){
 //   console.log('Open http://localhost:3333 in the browser');
