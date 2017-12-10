@@ -5,7 +5,7 @@ var path = require('path');
 var pug = require('pug');
 var bodyParser = require('body-parser');
 // load environment variables
-require('.env').config();
+require('dotenv').config();
 //set port
 var port = process.env.PORT || 5000
 const { Client } = require('pg');
@@ -22,7 +22,7 @@ app.use(express.static(path.join(__dirname, 'assets')));
 app.use(bodyParser.json());
 
 app.use(bodyParser.urlencoded({ extended: false}));
-app.use(expressValidator());
+
 
 //CREATE DATABASE blog;
 // \c blog;
