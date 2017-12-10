@@ -102,8 +102,7 @@ app.get('/form', function(req, res){
 app.post('/add-post', function(req, res){
 
   //pool.connect(function(err, client, done){
-     client.query('insert into posts (title, excerpt, body) values ($1, $2, $3)', [req.query.title, req.query.username , req.query.message],
-     , function(err, results){
+     client.query('insert into posts (title, excerpt, body) values ($1, $2, $3)', [req.query.title, req.query.username , req.query.message], function(err, results){
    //handle the error and results as appropriate.
              if(err){
                throw err;
