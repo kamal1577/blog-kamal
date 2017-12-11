@@ -3,11 +3,11 @@ div(class="container-fluid")
    div
        h1= title
        
-       form(action="/add-post" method="post")
+       form.navbar-form.navbar-left(action="/add-post" method="post")
            div
                label= 'Title:'
                br   
-               input(type='text' name='title')
+               input.form-control(type='text', name='title')
              
            div
                br
@@ -23,7 +23,7 @@ div(class="container-fluid")
            
            div 
                br
-               button(type='submit') Submit
+               button.btn.btn-default(type='submit') Submit
                
   
 include includes/footer.pug
